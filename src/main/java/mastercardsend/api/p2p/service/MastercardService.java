@@ -89,15 +89,18 @@ public class MastercardService {
             map.set("account_info.amount", paymentTransfer.getAmount());
             map.set("account_info.currency", paymentTransfer.getCurrency());
             map.set("account_info.payment_type", paymentTransfer.getPaymentType());
-            AccountInfo accountInfo = new AccountInfo(map).read(); // API call
 
-            boolean eligible = Boolean.parseBoolean((String) accountInfo.get("account_info.receiving_eligibility.eligible")); // check eligibility
+            AccountInfo accountInfo = new AccountInfo(map).read(); // API call
+            boolean eligible = (boolean) accountInfo.get("account_info.receiving_eligibility.eligible"); // check eligibility
             if (!eligible) {
                 error = (String) accountInfo.get("account_info.receiving_eligibility.reason_description");
             }
             return eligible;
         } catch (ApiException e) {
-            error = e.getMessage();
+            error = "HttpStatus: " + e.getHttpStatus() +
+                    "\nMessage: " + e.getMessage() +
+                    "\nReason Code: " + e.getReasonCode() +
+                    "\nSource: " + e.getSource() ;
             printErrors(e);
             return false;
         }
@@ -150,8 +153,13 @@ public class MastercardService {
             System.err.println("Could not convert request to JSON.");
             return null;
         } catch (ApiException e) {
-            error = e.getMessage();
+            System.out.println("Request:\n" + request);
+            error = "HttpStatus: " + e.getHttpStatus() +
+                    "\nMessage: " + e.getMessage() +
+                    "\nReason Code: " + e.getReasonCode() +
+                    "\nSource: " + e.getSource() ;
             printErrors(e);
+
             return null;
         }
     }

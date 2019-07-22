@@ -31,6 +31,32 @@ public class PaymentTransferController {
     @GetMapping("/")
     public String index(Model model) {
         MastercardSendPaymentTransfer paymentTransfer = new MastercardSendPaymentTransfer();
+
+        paymentTransfer.setSenderFirstName("Kane");
+        paymentTransfer.setSenderLastName("Smith");
+        paymentTransfer.setSenderAddressLine1("1 Main St");
+        paymentTransfer.setSenderCity("OFallon");
+        paymentTransfer.setSenderPostalCode("12393");
+        paymentTransfer.setSenderCountrySubdivision("MO");
+        paymentTransfer.setSenderCountry("USA");
+        paymentTransfer.setSenderUriIdentifier("5102589999999905");
+        paymentTransfer.setSenderUriExpMonth("04");
+        paymentTransfer.setSenderUriExpYear("2099");
+        paymentTransfer.setSenderUriCvc("123");
+
+        paymentTransfer.setRecipientFirstName("Kohn");
+        paymentTransfer.setRecipientLastName("Smoth");
+        paymentTransfer.setRecipientAddressLine1("2 Niam St");
+        paymentTransfer.setRecipientCity("OFallen");
+        paymentTransfer.setRecipientPostalCode("39321");
+        paymentTransfer.setRecipientUriIdentifier("5008539999999996");
+        paymentTransfer.setRecipientUriExpYear("2099");
+        paymentTransfer.setRecipientUriExpMonth("05");
+        paymentTransfer.setRecipientUriCvc("456");
+
+        paymentTransfer.setAmount("204");
+        paymentTransfer.setCurrency("USD");
+
         model.addAttribute("paymentTransfer", paymentTransfer);
         model.addAttribute("recipientUriSchemes", paymentTransfer.getRecipientUriSchemes());
         model.addAttribute("fundingSources", paymentTransfer.getFundingSources());
@@ -52,15 +78,15 @@ public class PaymentTransferController {
         paymentTransfer.setRecipientAccountUri();
 
         PaymentTransfer response = service.create(paymentTransfer);
-
         try {
+            redirectAttrs.addFlashAttribute("request", service.getRequest()); // JSON request will be displayed
             if (response != null) {
-                redirectAttrs.addFlashAttribute("request", service.getRequest()); // JSON request will be displayed
                 redirectAttrs.addFlashAttribute("response", new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response)); // JSON response will be displayed
                 redirectAttrs.addFlashAttribute("success", "Payment for " + paymentTransfer.getRecipientFirstName() + " " + paymentTransfer.getRecipientLastName() + " was successfully made!");
                 return "redirect:/";
             } else {
-                redirectAttrs.addFlashAttribute("error", "Failed to create payment transfer. " + service.getError());
+                redirectAttrs.addFlashAttribute("response", service.getError());
+                redirectAttrs.addFlashAttribute("error", "Failed to create payment transfer. ");
                 return "redirect:/";
             }
         } catch (JsonProcessingException e) {
