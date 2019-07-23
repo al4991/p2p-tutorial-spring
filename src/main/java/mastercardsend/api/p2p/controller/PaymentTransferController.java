@@ -32,7 +32,7 @@ public class PaymentTransferController {
     public String index(Model model) {
         MastercardSendPaymentTransfer paymentTransfer = new MastercardSendPaymentTransfer();
 
-        paymentTransfer.setSenderFirstName("Kane");
+        paymentTransfer.setSenderFirstName("Jane");
         paymentTransfer.setSenderLastName("Smith");
         paymentTransfer.setSenderAddressLine1("1 Main St");
         paymentTransfer.setSenderCity("OFallon");
@@ -44,17 +44,17 @@ public class PaymentTransferController {
         paymentTransfer.setSenderUriExpYear("2099");
         paymentTransfer.setSenderUriCvc("123");
 
-        paymentTransfer.setRecipientFirstName("Kohn");
-        paymentTransfer.setRecipientLastName("Smoth");
-        paymentTransfer.setRecipientAddressLine1("2 Niam St");
-        paymentTransfer.setRecipientCity("OFallen");
-        paymentTransfer.setRecipientPostalCode("39321");
+        paymentTransfer.setRecipientFirstName("John");
+        paymentTransfer.setRecipientLastName("Smith");
+        paymentTransfer.setRecipientAddressLine1("2 Main St");
+        paymentTransfer.setRecipientCity("OFallon");
+        paymentTransfer.setRecipientPostalCode("12393");
         paymentTransfer.setRecipientUriIdentifier("5008539999999996");
         paymentTransfer.setRecipientUriExpYear("2099");
         paymentTransfer.setRecipientUriExpMonth("05");
-        paymentTransfer.setRecipientUriCvc("456");
+        paymentTransfer.setRecipientUriCvc("123");
 
-        paymentTransfer.setAmount("204");
+        paymentTransfer.setAmount("100");
         paymentTransfer.setCurrency("USD");
 
         model.addAttribute("paymentTransfer", paymentTransfer);
