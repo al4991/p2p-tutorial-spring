@@ -36,11 +36,11 @@ public class PaymentTransferController {
         paymentTransfer.setSenderLastName("Smith");
         paymentTransfer.setSenderAddressLine1("1 Main St");
         paymentTransfer.setSenderCity("OFallon");
-        paymentTransfer.setSenderPostalCode("12393");
+        paymentTransfer.setSenderPostalCode("63368");
         paymentTransfer.setSenderCountrySubdivision("MO");
         paymentTransfer.setSenderCountry("USA");
-        paymentTransfer.setSenderUriIdentifier("5102589999999905");
-        paymentTransfer.setSenderUriExpMonth("04");
+        paymentTransfer.setSenderUriIdentifier("5509670000000187");
+        paymentTransfer.setSenderUriExpMonth("08");
         paymentTransfer.setSenderUriExpYear("2099");
         paymentTransfer.setSenderUriCvc("123");
 
@@ -48,13 +48,13 @@ public class PaymentTransferController {
         paymentTransfer.setRecipientLastName("Smith");
         paymentTransfer.setRecipientAddressLine1("2 Main St");
         paymentTransfer.setRecipientCity("OFallon");
-        paymentTransfer.setRecipientPostalCode("12393");
-        paymentTransfer.setRecipientUriIdentifier("5008539999999996");
+        paymentTransfer.setRecipientPostalCode("63368");
+        paymentTransfer.setRecipientUriIdentifier("5509670000000187");
         paymentTransfer.setRecipientUriExpYear("2099");
-        paymentTransfer.setRecipientUriExpMonth("05");
+        paymentTransfer.setRecipientUriExpMonth("08");
         paymentTransfer.setRecipientUriCvc("123");
 
-        paymentTransfer.setAmount("100");
+        paymentTransfer.setAmount("44");
         paymentTransfer.setCurrency("USD");
 
         model.addAttribute("paymentTransfer", paymentTransfer);
